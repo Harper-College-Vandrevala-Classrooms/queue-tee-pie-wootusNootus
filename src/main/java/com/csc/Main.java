@@ -2,33 +2,35 @@ package com.csc;
 
 public class Main {
     public static void main(String[] args) {
-        // Create some Cutie objects
-        Cutie puppy = new Puppy("A little puppy with big, sad eyes", 11);
-        Cutie kitty = new Kitty("A fluffy kitty with soft fur", 10);
-        Cutie piggy = new Piggy("A cute piggy with a curly tail", 9);
+        // Create a stack of Integers
+        QueueTees<Integer> intStack = new QueueTees<>(3);
 
-        // Create a QueueTees instance
-        QueueTees queue = new QueueTees(3);
+        intStack.enqueue(10);
+        intStack.enqueue(20);
+        intStack.enqueue(30);
+        intStack.enqueue(40); // This should fail due to capacity constraint
 
-        // Test queue operations
-        System.out.println("Initial size: " + queue.size());
+        System.out.println("Current stack size: " + intStack.size());
 
-        queue.enqueue(puppy);
-        queue.enqueue(kitty);
-        queue.enqueue(piggy);
+        intStack.dequeue();
+        intStack.dequeue();
 
-        System.out.println("Size after enqueueing: " + queue.size());
+        System.out.println("Stack size after popping 2 elements: " + intStack.size());
 
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
+        // Clear the stack
+        intStack.clear();
+        System.out.println("Stack size after clearing: " + intStack.size());
 
-        System.out.println("Final size: " + queue.size());
+        // Create a stack of Strings
+        QueueTees<String> stringStack = new QueueTees<>(2);
 
-        // Testing enqueue on full queue
-        queue.enqueue(puppy);
-        queue.enqueue(kitty);
-        queue.enqueue(piggy);
-        queue.enqueue(puppy); 
+        stringStack.enqueue("Hello");
+        stringStack.enqueue("World");
+
+        // Attempting to push another when full
+        stringStack.enqueue("!");
+
+        System.out.println("String stack size: " + stringStack.size());
+        stringStack.clear();
     }
 }
